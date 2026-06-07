@@ -76,8 +76,8 @@ export function Hero() {
             </div>
 
             <h1 className="text-[1.65rem] font-bold leading-snug tracking-tight sm:text-4xl lg:text-5xl text-white">
-              무직·연체·저신용·신불자도,<br />
-              <span className="text-yellow-400">높은 확률로 승인</span><br />
+              <span className="whitespace-nowrap">무직·연체·저신용·신불자도,</span><br />
+              <span className="text-yellow-400 whitespace-nowrap">높은 확률로 승인</span><br />
               가능합니다.
             </h1>
 
