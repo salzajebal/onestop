@@ -5,7 +5,7 @@ function KakaoIcon() {
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 512 512"
-      className="h-9 w-9"
+      className="h-8 w-8 sm:h-9 sm:w-9"
       aria-hidden="true"
     >
       <path
@@ -37,15 +37,15 @@ export function KakaoButton() {
   };
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col items-center gap-2">
+    <div className="fixed bottom-5 right-4 sm:bottom-6 sm:right-6 z-50 flex flex-col items-center gap-1.5">
       <button
         onClick={handleClick}
-        className="flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FEE500] shadow-lg transition-transform hover:scale-105 active:scale-95"
+        className="flex h-14 w-14 sm:h-[72px] sm:w-[72px] items-center justify-center rounded-full bg-[#FEE500] shadow-lg transition-transform hover:scale-105 active:scale-95"
         aria-label="카카오톡 상담하기"
       >
         <KakaoIcon />
       </button>
-      <span className="rounded bg-black/70 px-2 py-1 text-xs font-semibold text-white shadow-sm">
+      <span className="rounded bg-black/70 px-2 py-0.5 text-[10px] sm:text-xs font-semibold text-white shadow-sm whitespace-nowrap">
         TALK 상담하기
       </span>
     </div>

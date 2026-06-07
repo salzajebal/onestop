@@ -4,12 +4,12 @@ export function Footer() {
   const { data: settings } = useGetSettings();
 
   return (
-    <footer className="bg-zinc-950 text-zinc-400 py-12 px-4">
+    <footer className="bg-zinc-950 text-zinc-400 py-10 px-4">
       <div className="container mx-auto max-w-6xl">
-        <div className="grid gap-8 md:grid-cols-2">
+        <div className="grid gap-8 sm:grid-cols-2">
           <div>
-            <h2 className="text-2xl font-bold text-white mb-4">퍼펙트론</h2>
-            <div className="space-y-2 text-sm">
+            <h2 className="text-xl font-bold text-white mb-3">퍼펙트론</h2>
+            <div className="space-y-1.5 text-sm">
               <p>상호: {settings?.companyName || "퍼펙트론"}</p>
               <p>대표자: {settings?.representative || "-"}</p>
               <p>사업자등록번호: {settings?.businessNumber || "-"}</p>
@@ -17,7 +17,7 @@ export function Footer() {
               <p>대표전화: {settings?.phone || "-"}</p>
             </div>
           </div>
-          <div className="text-sm space-y-4">
+          <div className="text-sm space-y-3">
             <p className="leading-relaxed">
               금리 이내(연체이자 포함, 2021.7.7부터 체결, 갱신, 연장하는 계약에 한함), 취급수수료 없음, 중도상환 수수료 없음, 중개수수료 없음, 추가비용 없음. 상환기간 : 12개월 ~ 120개월
             </p>
@@ -26,7 +26,7 @@ export function Footer() {
             </p>
           </div>
         </div>
-        <div className="mt-8 pt-8 border-t border-zinc-800 text-center text-sm">
+        <div className="mt-8 pt-6 border-t border-zinc-800 text-center text-xs sm:text-sm">
           <p>© 2025 퍼펙트론. All rights reserved.</p>
         </div>
       </div>
