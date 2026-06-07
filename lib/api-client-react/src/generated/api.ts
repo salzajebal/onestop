@@ -30,7 +30,9 @@ import type {
   HealthStatus,
   ListApplicationsParams,
   Settings,
-  SettingsInput
+  SettingsInput,
+  TelegramDetectInput,
+  TelegramDetectResult
 } from './api.schemas';
 
 import { customFetch } from '../custom-fetch';
@@ -571,6 +573,77 @@ export const useUpdateSettings = <TError = ErrorType<void>,
         TContext
       > => {
       return useMutation(getUpdateSettingsMutationOptions(options));
+    }
+
+export const getDetectTelegramChatUrl = () => {
+
+
+
+
+  return `/api/telegram/detect-chat`
+}
+
+/**
+ * @summary Detect Telegram chat ID from bot token
+ */
+export const detectTelegramChat = async (telegramDetectInput: TelegramDetectInput, options?: RequestInit): Promise<TelegramDetectResult> => {
+
+  return customFetch<TelegramDetectResult>(getDetectTelegramChatUrl(),
+  {
+    ...options,
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json', ...options?.headers },
+    body: JSON.stringify(
+      telegramDetectInput,)
+  }
+);}
+
+
+
+
+export const getDetectTelegramChatMutationOptions = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof detectTelegramChat>>, TError,{data: BodyType<TelegramDetectInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+): UseMutationOptions<Awaited<ReturnType<typeof detectTelegramChat>>, TError,{data: BodyType<TelegramDetectInput>}, TContext> => {
+
+const mutationKey = ['detectTelegramChat'];
+const {mutation: mutationOptions, request: requestOptions} = options ?
+      options.mutation && 'mutationKey' in options.mutation && options.mutation.mutationKey ?
+      options
+      : {...options, mutation: {...options.mutation, mutationKey}}
+      : {mutation: { mutationKey, }, request: undefined};
+
+
+
+
+      const mutationFn: MutationFunction<Awaited<ReturnType<typeof detectTelegramChat>>, {data: BodyType<TelegramDetectInput>}> = (props) => {
+          const {data} = props ?? {};
+
+          return  detectTelegramChat(data,requestOptions)
+        }
+
+
+
+
+
+
+  return  { mutationFn, ...mutationOptions }}
+
+    export type DetectTelegramChatMutationResult = NonNullable<Awaited<ReturnType<typeof detectTelegramChat>>>
+    export type DetectTelegramChatMutationBody = BodyType<TelegramDetectInput>
+    export type DetectTelegramChatMutationError = ErrorType<void>
+
+    /**
+ * @summary Detect Telegram chat ID from bot token
+ */
+export const useDetectTelegramChat = <TError = ErrorType<void>,
+    TContext = unknown>(options?: { mutation?:UseMutationOptions<Awaited<ReturnType<typeof detectTelegramChat>>, TError,{data: BodyType<TelegramDetectInput>}, TContext>, request?: SecondParameter<typeof customFetch>}
+ ): UseMutationResult<
+        Awaited<ReturnType<typeof detectTelegramChat>>,
+        TError,
+        {data: BodyType<TelegramDetectInput>},
+        TContext
+      > => {
+      return useMutation(getDetectTelegramChatMutationOptions(options));
     }
 
 export const getAdminLoginUrl = () => {

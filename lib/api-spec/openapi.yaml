@@ -140,6 +140,27 @@ paths:
         "401":
           description: Unauthorized
 
+  /telegram/detect-chat:
+    post:
+      operationId: detectTelegramChat
+      tags: [settings]
+      summary: Detect Telegram chat ID from bot token
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TelegramDetectInput"
+      responses:
+        "200":
+          description: Detected chats
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/TelegramDetectResult"
+        "400":
+          description: Invalid token or no chats found
+
   /admin/login:
     post:
       operationId: adminLogin
@@ -305,6 +326,33 @@ components:
       properties:
         success:
           type: boolean
+
+    TelegramDetectInput:
+      type: object
+      required: [botToken]
+      properties:
+        botToken:
+          type: string
+
+    TelegramChat:
+      type: object
+      required: [id, title, type]
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        type:
+          type: string
+
+    TelegramDetectResult:
+      type: object
+      required: [chats]
+      properties:
+        chats:
+          type: array
+          items:
+            $ref: "#/components/schemas/TelegramChat"
 
     AdminSession:
       type: object

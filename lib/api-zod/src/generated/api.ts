@@ -117,6 +117,22 @@ export const UpdateSettingsResponse = zod.object({
 
 
 /**
+ * @summary Detect Telegram chat ID from bot token
+ */
+export const DetectTelegramChatBody = zod.object({
+  "botToken": zod.string()
+})
+
+export const DetectTelegramChatResponse = zod.object({
+  "chats": zod.array(zod.object({
+  "id": zod.string(),
+  "title": zod.string(),
+  "type": zod.string()
+}))
+})
+
+
+/**
  * @summary Admin login
  */
 export const AdminLoginBody = zod.object({

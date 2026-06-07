@@ -2,7 +2,7 @@ import { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-import { LogOut, Trash2, Settings, Users, Activity, Loader2 } from "lucide-react";
+import { LogOut, Trash2, Settings, Users, Activity, Loader2, Search } from "lucide-react";
 import { format } from "date-fns";
 
 import { Button } from "@/components/ui/button";
@@ -22,10 +22,12 @@ import {
   useGetSettings,
   getGetSettingsQueryKey,
   useUpdateSettings,
+  useDetectTelegramChat,
   useListApplications,
   useGetApplicationStats,
   getGetApplicationStatsQueryKey,
   useDeleteApplication,
+  type TelegramChat,
 } from "@workspace/api-client-react";
 import { useQueryClient } from "@tanstack/react-query";
 
@@ -321,8 +323,10 @@ function ApplicationsTable() {
 function SettingsPanel() {
   const { data: settings, isLoading } = useGetSettings();
   const updateSettings = useUpdateSettings();
+  const detectChat = useDetectTelegramChat();
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const [detectedChats, setDetectedChats] = useState<TelegramChat[]>([]);
 
   const form = useForm<z.infer<typeof settingsSchema>>({
     resolver: zodResolver(settingsSchema),
@@ -356,6 +360,39 @@ function SettingsPanel() {
     }
   }, [settings, form]);
 
+  const handleDetectChat = () => {
+    const token = form.getValues("telegramBotToken") || "";
+    if (!token) {
+      toast({ title: "봇 토큰을 먼저 입력해주세요.", variant: "destructive" });
+      return;
+    }
+    detectChat.mutate(
+      { data: { botToken: token } },
+      {
+        onSuccess: (data) => {
+          if (data.chats.length === 0) {
+            toast({
+              title: "채팅방을 찾을 수 없습니다.",
+              description: "봇을 채팅방에 먼저 초대하고, 메시지를 한 번 보낸 후 다시 시도하세요.",
+              variant: "destructive",
+            });
+            return;
+          }
+          setDetectedChats(data.chats);
+          if (data.chats.length === 1) {
+            form.setValue("telegramChatId", data.chats[0].id);
+            toast({ title: `채팅방 감지 완료: ${data.chats[0].title}` });
+          } else {
+            toast({ title: `${data.chats.length}개 채팅방이 감지됐습니다. 선택해주세요.` });
+          }
+        },
+        onError: () => {
+          toast({ title: "봇 토큰이 잘못되었거나 연결에 실패했습니다.", variant: "destructive" });
+        },
+      }
+    );
+  };
+
   const onSubmit = (values: z.infer<typeof settingsSchema>) => {
     updateSettings.mutate({ data: values }, {
       onSuccess: () => {
@@ -379,7 +416,7 @@ function SettingsPanel() {
       <CardContent>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-            
+
             <div className="space-y-4">
               <h3 className="font-medium text-lg border-b pb-2">연동 설정</h3>
               <div className="grid gap-4 md:grid-cols-2">
@@ -390,18 +427,64 @@ function SettingsPanel() {
                     <FormMessage />
                   </FormItem>
                 )} />
-                <div className="col-span-2 grid grid-cols-2 gap-4">
+
+                {/* 텔레그램 봇 토큰 + 자동 감지 */}
+                <div className="md:col-span-2 grid gap-4 md:grid-cols-2">
                   <FormField control={form.control} name="telegramBotToken" render={({ field }) => (
                     <FormItem>
                       <FormLabel>텔레그램 봇 토큰</FormLabel>
-                      <FormControl><Input placeholder="0000000000:AAH..." {...field} /></FormControl>
+                      <div className="flex gap-2">
+                        <FormControl>
+                          <Input placeholder="0000000000:AAH..." {...field} />
+                        </FormControl>
+                        <Button
+                          type="button"
+                          variant="outline"
+                          size="icon"
+                          onClick={handleDetectChat}
+                          disabled={detectChat.isPending}
+                          title="채팅방 자동 감지"
+                        >
+                          {detectChat.isPending
+                            ? <Loader2 className="h-4 w-4 animate-spin" />
+                            : <Search className="h-4 w-4" />}
+                        </Button>
+                      </div>
+                      <p className="text-xs text-gray-500 mt-1">토큰 입력 후 🔍 버튼으로 채팅방을 자동 감지합니다.</p>
                       <FormMessage />
                     </FormItem>
                   )} />
+
                   <FormField control={form.control} name="telegramChatId" render={({ field }) => (
                     <FormItem>
                       <FormLabel>텔레그램 채팅방 ID</FormLabel>
-                      <FormControl><Input placeholder="-100000000" {...field} /></FormControl>
+                      {detectedChats.length > 1 ? (
+                        <div className="flex flex-col gap-1.5">
+                          {detectedChats.map((chat) => (
+                            <button
+                              key={chat.id}
+                              type="button"
+                              onClick={() => {
+                                form.setValue("telegramChatId", chat.id);
+                                setDetectedChats([]);
+                                toast({ title: `선택됨: ${chat.title}` });
+                              }}
+                              className={`text-left text-sm px-3 py-2 rounded border transition-colors ${
+                                field.value === chat.id
+                                  ? "border-primary bg-primary/5 text-primary font-semibold"
+                                  : "border-gray-200 hover:border-primary hover:bg-primary/5"
+                              }`}
+                            >
+                              <span className="font-medium">{chat.title}</span>
+                              <span className="ml-2 text-gray-400 text-xs">{chat.id}</span>
+                            </button>
+                          ))}
+                        </div>
+                      ) : (
+                        <FormControl>
+                          <Input placeholder="-100000000" {...field} />
+                        </FormControl>
+                      )}
                       <FormMessage />
                     </FormItem>
                   )} />

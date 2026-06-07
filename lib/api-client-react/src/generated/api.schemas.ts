@@ -70,6 +70,20 @@ export interface AdminAuthResult {
   success: boolean;
 }
 
+export interface TelegramDetectInput {
+  botToken: string;
+}
+
+export interface TelegramChat {
+  id: string;
+  title: string;
+  type: string;
+}
+
+export interface TelegramDetectResult {
+  chats: TelegramChat[];
+}
+
 export interface AdminSession {
   authenticated: boolean;
 }

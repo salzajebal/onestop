@@ -59,6 +59,47 @@ router.get("/settings", async (_req, res): Promise<void> => {
   });
 });
 
+router.post("/telegram/detect-chat", async (req, res): Promise<void> => {
+  const { botToken } = req.body as { botToken?: string };
+  if (!botToken) {
+    res.status(400).json({ error: "botToken is required" });
+    return;
+  }
+
+  try {
+    const response = await fetch(
+      `https://api.telegram.org/bot${botToken}/getUpdates?limit=100&allowed_updates=["message","my_chat_member","chat_member"]`
+    );
+    const data = await response.json() as {
+      ok: boolean;
+      result: Array<{
+        message?: { chat: { id: number; title?: string; first_name?: string; type: string } };
+        my_chat_member?: { chat: { id: number; title?: string; first_name?: string; type: string } };
+      }>;
+    };
+
+    if (!data.ok) {
+      res.status(400).json({ error: "Invalid bot token" });
+      return;
+    }
+
+    const chatMap = new Map<string, { id: string; title: string; type: string }>();
+    for (const update of data.result) {
+      const chat = update.message?.chat ?? update.my_chat_member?.chat;
+      if (chat) {
+        const id = String(chat.id);
+        const title = chat.title ?? chat.first_name ?? id;
+        chatMap.set(id, { id, title, type: chat.type });
+      }
+    }
+
+    const chats = Array.from(chatMap.values());
+    res.json({ chats });
+  } catch {
+    res.status(400).json({ error: "Failed to connect to Telegram API" });
+  }
+});
+
 router.put("/settings", async (req, res): Promise<void> => {
   const parsed = UpdateSettingsBody.safeParse(req.body);
   if (!parsed.success) {

@@ -17,3 +17,6 @@ export * from './healthStatus';
 export * from './listApplicationsParams';
 export * from './settings';
 export * from './settingsInput';
+export * from './telegramChat';
+export * from './telegramDetectInput';
+export * from './telegramDetectResult';
