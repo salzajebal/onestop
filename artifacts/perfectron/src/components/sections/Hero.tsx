@@ -80,10 +80,10 @@ export function Hero() {
               대출이 필요한 순간, 퍼펙트론
             </div>
             
-            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl xl:text-6xl text-white">
-              무직·연체·저신용·신불자도,
-              <br className="hidden lg:block" />
-              <span className="text-yellow-400">높은 확률로 승인</span> 가능합니다.
+            <h1 className="text-4xl font-bold leading-tight tracking-tight lg:text-5xl text-white">
+              무직·연체·저신용·신불자도,<br />
+              <span className="text-yellow-400">높은 확률로 승인</span><br />
+              가능합니다.
             </h1>
             
             <p className="text-lg text-blue-100/90 lg:text-xl max-w-xl leading-relaxed">
