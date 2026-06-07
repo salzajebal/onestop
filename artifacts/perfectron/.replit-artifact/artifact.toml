@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "퍼펙트론"
+version = "1.0.0"
+id = "artifacts/perfectron"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 24544
+
+[services.development]
+run = "pnpm --filter @workspace/perfectron run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/perfectron", "run", "build" ]
+publicDir = "artifacts/perfectron/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "24544"
+BASE_PATH = "/"
