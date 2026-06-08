@@ -42,6 +42,7 @@ const settingsSchema = z.object({
   companyName: z.string().optional(),
   representative: z.string().optional(),
   businessNumber: z.string().optional(),
+  registrationNumber: z.string().optional(),
   address: z.string().optional(),
   phone: z.string().optional(),
 });
@@ -337,6 +338,7 @@ function SettingsPanel() {
       companyName: "",
       representative: "",
       businessNumber: "",
+      registrationNumber: "",
       address: "",
       phone: "",
     },
@@ -353,6 +355,7 @@ function SettingsPanel() {
         companyName: settings.companyName || "",
         representative: settings.representative || "",
         businessNumber: settings.businessNumber || "",
+        registrationNumber: settings.registrationNumber || "",
         address: settings.address || "",
         phone: settings.phone || "",
       });
@@ -513,6 +516,13 @@ function SettingsPanel() {
                   <FormItem>
                     <FormLabel>사업자등록번호</FormLabel>
                     <FormControl><Input placeholder="123-45-67890" {...field} /></FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )} />
+                <FormField control={form.control} name="registrationNumber" render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>대부중개업등록번호</FormLabel>
+                    <FormControl><Input placeholder="2023-충북청주-0011" {...field} /></FormControl>
                     <FormMessage />
                   </FormItem>
                 )} />

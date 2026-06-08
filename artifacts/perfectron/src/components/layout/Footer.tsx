@@ -13,6 +13,9 @@ export function Footer() {
               <p>상호: {settings?.companyName || "퍼펙트론"}</p>
               <p>대표자: {settings?.representative || "-"}</p>
               <p>사업자등록번호: {settings?.businessNumber || "-"}</p>
+              {settings?.registrationNumber && (
+                <p>대부중개업등록번호: {settings.registrationNumber}</p>
+              )}
               <p>주소: {settings?.address || "-"}</p>
               <p>대표전화: {settings?.phone || "-"}</p>
             </div>

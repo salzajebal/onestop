@@ -274,7 +274,7 @@ components:
 
     Settings:
       type: object
-      required: [kakaoLink, telegramBotToken, telegramChatId, companyName, representative, businessNumber, address, phone]
+      required: [kakaoLink, telegramBotToken, telegramChatId, companyName, representative, businessNumber, registrationNumber, address, phone]
       properties:
         kakaoLink:
           type: string
@@ -287,6 +287,8 @@ components:
         representative:
           type: string
         businessNumber:
+          type: string
+        registrationNumber:
           type: string
         address:
           type: string
@@ -307,6 +309,8 @@ components:
         representative:
           type: string
         businessNumber:
+          type: string
+        registrationNumber:
           type: string
         address:
           type: string

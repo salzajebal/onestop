@@ -12,6 +12,7 @@ const SETTING_KEYS = [
   "companyName",
   "representative",
   "businessNumber",
+  "registrationNumber",
   "address",
   "phone",
 ] as const;
@@ -23,6 +24,7 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   companyName: "퍼펙트론",
   representative: "",
   businessNumber: "",
+  registrationNumber: "",
   address: "",
   phone: "",
 };
@@ -54,6 +56,7 @@ router.get("/settings", async (_req, res): Promise<void> => {
     companyName: settings.companyName ?? "",
     representative: settings.representative ?? "",
     businessNumber: settings.businessNumber ?? "",
+    registrationNumber: settings.registrationNumber ?? "",
     address: settings.address ?? "",
     phone: settings.phone ?? "",
   });
@@ -126,6 +129,7 @@ router.put("/settings", async (req, res): Promise<void> => {
     companyName: settings.companyName ?? "",
     representative: settings.representative ?? "",
     businessNumber: settings.businessNumber ?? "",
+    registrationNumber: settings.registrationNumber ?? "",
     address: settings.address ?? "",
     phone: settings.phone ?? "",
   });

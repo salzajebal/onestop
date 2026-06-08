@@ -13,6 +13,7 @@ export interface SettingsInput {
   companyName?: string;
   representative?: string;
   businessNumber?: string;
+  registrationNumber?: string;
   address?: string;
   phone?: string;
 }

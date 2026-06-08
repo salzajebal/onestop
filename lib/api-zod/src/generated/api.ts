@@ -85,6 +85,7 @@ export const GetSettingsResponse = zod.object({
   "companyName": zod.string(),
   "representative": zod.string(),
   "businessNumber": zod.string(),
+  "registrationNumber": zod.string(),
   "address": zod.string(),
   "phone": zod.string()
 })
@@ -100,6 +101,7 @@ export const UpdateSettingsBody = zod.object({
   "companyName": zod.string().optional(),
   "representative": zod.string().optional(),
   "businessNumber": zod.string().optional(),
+  "registrationNumber": zod.string().optional(),
   "address": zod.string().optional(),
   "phone": zod.string().optional()
 })
@@ -111,6 +113,7 @@ export const UpdateSettingsResponse = zod.object({
   "companyName": zod.string(),
   "representative": zod.string(),
   "businessNumber": zod.string(),
+  "registrationNumber": zod.string(),
   "address": zod.string(),
   "phone": zod.string()
 })
