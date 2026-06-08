@@ -1,5 +1,12 @@
 import { useGetSettings } from "@workspace/api-client-react";
 
+function formatPhone(phone: string): string {
+  const digits = phone.replace(/\D/g, "");
+  if (digits.length === 11) return `${digits.slice(0, 3)}-${digits.slice(3, 7)}-${digits.slice(7)}`;
+  if (digits.length === 10) return `${digits.slice(0, 3)}-${digits.slice(3, 6)}-${digits.slice(6)}`;
+  return phone;
+}
+
 export function Footer() {
   const { data: settings } = useGetSettings();
 
@@ -16,7 +23,7 @@ export function Footer() {
                 <p>대부중개업등록번호 : {settings.registrationNumber}</p>
               )}
               <p>주소 : {settings?.address || "충청북도 청주시 청원구 내덕동 788-115"}</p>
-              <p>전화번호 : {settings?.phone || "010-5807-7888"}</p>
+              <p>전화번호 : {formatPhone(settings?.phone || "01058077888")}</p>
             </div>
           </div>
           <div className="text-sm space-y-3">
