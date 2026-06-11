@@ -1,5 +1,5 @@
 import { Router, type IRouter } from "express";
-import { desc, count, gte, sql } from "drizzle-orm";
+import { desc, count, gte, sql, eq } from "drizzle-orm";
 import { db, applicationsTable } from "@workspace/db";
 import {
   CreateApplicationBody,
@@ -12,6 +12,10 @@ import { getSettingValue } from "./settings";
 
 const router: IRouter = Router();
 
+function normalizePhone(phone: string): string {
+  return phone.replace(/\D/g, "");
+}
+
 router.post("/applications", async (req, res): Promise<void> => {
   const parsed = CreateApplicationBody.safeParse(req.body);
   if (!parsed.success) {
@@ -19,9 +23,22 @@ router.post("/applications", async (req, res): Promise<void> => {
     return;
   }
 
+  const normalizedPhone = normalizePhone(parsed.data.phone);
+
+  const existing = await db
+    .select({ id: applicationsTable.id })
+    .from(applicationsTable)
+    .where(eq(applicationsTable.phone, normalizedPhone))
+    .limit(1);
+
+  if (existing.length > 0) {
+    res.status(409).json({ error: "이미 신청된 전화번호입니다." });
+    return;
+  }
+
   const [application] = await db
     .insert(applicationsTable)
-    .values(parsed.data)
+    .values({ ...parsed.data, phone: normalizedPhone })
     .returning();
 
   const appData = {

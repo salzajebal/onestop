@@ -53,12 +53,21 @@ export function Hero() {
           form.reset();
           setStep(1);
         },
-        onError: () => {
-          toast({
-            title: "신청 중 오류가 발생했습니다.",
-            description: "다시 시도해주세요.",
-            variant: "destructive",
-          });
+        onError: (error: unknown) => {
+          const status = (error as { response?: { status?: number } })?.response?.status;
+          if (status === 409) {
+            toast({
+              title: "이미 신청된 전화번호입니다.",
+              description: "동일한 번호로는 중복 신청이 불가합니다.",
+              variant: "destructive",
+            });
+          } else {
+            toast({
+              title: "신청 중 오류가 발생했습니다.",
+              description: "다시 시도해주세요.",
+              variant: "destructive",
+            });
+          }
         },
       }
     );
