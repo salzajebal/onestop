@@ -17,7 +17,7 @@ export function Footer() {
           <div>
             <h2 className="text-xl font-bold text-white mb-3">{settings?.companyName || "우주캐피탈대부"}</h2>
             <div className="space-y-1.5 text-sm">
-              <p>회사명 : {settings?.companyName || "우주캐피탈대부"} / 대표자 : {settings?.representative || "강윤희, 정충헌"}</p>
+              <p>회사명 : {settings?.companyName || "우주캐피탈대부"} / 대표자 : {settings?.representative || "강윤희"}</p>
               <p>사업자번호 : {settings?.businessNumber || "738-95-01643"}</p>
               {settings?.registrationNumber && (
                 <p>대부중개업등록번호 : {settings.registrationNumber}</p>
