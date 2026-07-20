@@ -1,55 +1,57 @@
-import { Star } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
-export function Reviews() {
-  const reviews = [
-    {
-      name: "김*현",
-      tag: "무직자",
-      date: "2025.01",
-      content: "무직이라 어디서나 거절당했는데 퍼펙트론에서 승인이 됐어요. 정말 감사합니다. 당일 바로 입금까지 완료!",
-    },
-    {
-      name: "이*준",
-      tag: "연체자",
-      date: "2025.02",
-      content: "연체 이력이 있어서 포기했는데, 상담사분이 너무 친절하게 도와주셨어요. 금리도 생각보다 낮아서 만족해요.",
-    },
-    {
-      name: "박*미",
-      tag: "신불자",
-      date: "2025.03",
-      content: "신불자라 포기하고 있었는데, 퍼펙트론에서 방법을 찾아주셨어요. 상담 과정이 투명하고 수수료도 없어서 믿음이 갔습니다.",
-    },
-  ];
+const reviews = [
+  {
+    title: "연체 중에도 승인됐어요",
+    content: "7등급이라 다 거절당했는데, 신청한 당일 바로 입금됐어요. 진짜 되는 곳이 있더라고요.",
+    author: "박OO님 · 직장인 · 서울",
+  },
+  {
+    title: "무직인데 상담이 됐어요",
+    content: "무직이라 상담조차 안 될 줄 알았는데, 가능한 상품을 자분히 찾아주셔서 놀랐습니다.",
+    author: "이OO님 · 구직 중 · 경기",
+  },
+  {
+    title: "서류 걱정을 없었어요",
+    content: "프리랜서라 서류 걱정이 많았는데 상담사님이 다 정리해주셨어요. 다음에도 여기로요.",
+    author: "김OO님 · 프리랜서 · 부산",
+  },
+  {
+    title: "이자가 확 줄었어요",
+    content: "카드론을 돌려막던 상황이었는데 한 번에 갈아타기로 이자가 확 줄었어요.",
+    author: "최OO님 · 대환 · 인천",
+  },
+  {
+    title: "재촉하지 않아 좋았어요",
+    content: "상담 내내 재촉하지 않고 상황을 충분히 설명해주셔서 진행할 수 있었습니다.",
+    author: "윤OO님 · 주부 · 광주",
+  },
+  {
+    title: "소액이라 간편했어요",
+    content: "급하게 소액이 필요했는데 정말 간단하게 부담 없이 빠르게 받았어요.",
+    author: "정OO님 · 자영업 · 대구",
+  },
+];
 
+export function Reviews() {
   return (
-    <section className="bg-white py-16 md:py-24">
+    <section className="bg-gray-50 py-16 md:py-24">
       <div className="container mx-auto max-w-6xl px-4">
-        <div className="text-center mb-10 md:mb-16">
-          <h2 className="text-2xl font-bold text-gray-900 sm:text-3xl md:text-4xl">실제 이용 후기</h2>
-          <p className="mt-3 text-base text-gray-600 sm:text-lg">퍼펙트론을 통해 희망을 찾으신 고객님들의 이야기</p>
+        <div className="text-center mb-10 md:mb-14">
+          <p className="text-sm font-semibold text-[#22c55e] mb-2">고객 후기</p>
+          <h2 className="text-2xl font-extrabold text-gray-900 sm:text-3xl md:text-4xl">
+            먼저 길을 찾은 분들의 이야기
+          </h2>
         </div>
 
-        <div className="grid gap-4 sm:gap-6 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
-          {reviews.map((review, index) => (
-            <Card key={index} className="bg-gray-50/50 border-gray-100">
+        <div className="grid gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3">
+          {reviews.map((r, i) => (
+            <Card key={i} className="bg-white border-gray-100 shadow-sm">
               <CardContent className="pt-5 pb-5">
-                <div className="flex text-yellow-400 mb-3">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 sm:h-5 sm:w-5 fill-current" />
-                  ))}
-                </div>
-                <p className="mb-5 text-gray-700 leading-relaxed text-sm sm:text-base">
-                  "{review.content}"
-                </p>
-                <div className="flex items-center justify-between border-t border-gray-200 pt-3">
-                  <div className="font-semibold text-gray-900 text-sm sm:text-base">
-                    {review.name}{" "}
-                    <span className="text-xs sm:text-sm font-normal text-primary ml-1">({review.tag})</span>
-                  </div>
-                  <div className="text-xs sm:text-sm text-gray-500">{review.date}</div>
-                </div>
+                <p className="mb-1 text-xs font-bold text-zinc-400">"</p>
+                <h3 className="mb-2 text-base font-bold text-gray-900">{r.title}</h3>
+                <p className="mb-4 text-sm text-gray-500 leading-relaxed">{r.content}</p>
+                <p className="text-xs text-gray-400 border-t border-gray-100 pt-3">{r.author}</p>
               </CardContent>
             </Card>
           ))}
