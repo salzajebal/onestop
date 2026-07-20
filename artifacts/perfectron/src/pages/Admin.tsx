@@ -93,7 +93,7 @@ function LoginForm() {
     <div className="min-h-screen flex items-center justify-center bg-gray-50 px-4">
       <Card className="w-full max-w-md">
         <CardHeader className="text-center">
-          <CardTitle className="text-2xl text-primary font-bold">퍼펙트론 관리자</CardTitle>
+          <CardTitle className="text-2xl text-primary font-bold">원스톱 머니 관리자</CardTitle>
           <CardDescription>관리자 비밀번호를 입력해주세요</CardDescription>
         </CardHeader>
         <CardContent>
@@ -138,7 +138,7 @@ function AdminDashboard() {
     <div className="min-h-screen bg-gray-50 flex flex-col">
       <header className="bg-white border-b sticky top-0 z-30">
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
-          <div className="font-bold text-xl text-primary">퍼펙트론 관리자</div>
+          <div className="font-bold text-xl text-primary">원스톱 머니 관리자</div>
           <Button variant="ghost" size="sm" onClick={handleLogout} className="text-gray-500">
             <LogOut className="h-4 w-4 mr-2" /> 로그아웃
           </Button>

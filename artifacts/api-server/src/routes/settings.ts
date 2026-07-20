@@ -21,7 +21,7 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   kakaoLink: "",
   telegramBotToken: "",
   telegramChatId: "",
-  companyName: "퍼펙트론",
+  companyName: "원스톱 머니",
   representative: "",
   businessNumber: "",
   registrationNumber: "",
