@@ -21,12 +21,12 @@ const DEFAULT_SETTINGS: Record<string, string> = {
   kakaoLink: "",
   telegramBotToken: "",
   telegramChatId: "",
-  companyName: "원스톱 머니",
-  representative: "",
-  businessNumber: "",
-  registrationNumber: "",
-  address: "",
-  phone: "",
+  companyName: "유앤에스 파이낸셜대부중개",
+  representative: "정의선",
+  businessNumber: "648-20-02701",
+  registrationNumber: "2026-부산기장-0003",
+  address: "부산광역시 기장군 일광읍 해송2로 10, 일광역 유림노르웨이아침 306호",
+  phone: "010-2451-3130",
 };
 
 export async function getSettingValue(key: string): Promise<string> {

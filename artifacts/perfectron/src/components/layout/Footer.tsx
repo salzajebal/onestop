@@ -9,7 +9,7 @@ function formatPhone(phone: string): string {
 
 export function Footer() {
   const { data: settings } = useGetSettings();
-  const companyName = settings?.companyName || "원스톱 머니";
+  const companyName = settings?.companyName || "유앤에스 파이낸셜대부중개";
   const phone = formatPhone(settings?.phone || "1600-0000");
 
   return (
