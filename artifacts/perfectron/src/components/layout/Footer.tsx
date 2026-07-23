@@ -29,7 +29,7 @@ export function Footer() {
             </div>
           </div>
           <div className="text-right text-sm">
-            <p className="text-white font-semibold">고객센터 {phone}</p>
+            <p className="text-white font-semibold">전화 {phone}</p>
             <p className="text-zinc-500 mt-1">평일 09:00 ~ 18:00 · 주말·공휴일 휴무</p>
           </div>
         </div>
