@@ -16,21 +16,16 @@ export function Footer() {
     <footer className="bg-[#0d1117] text-zinc-400 py-12 px-4">
       <div className="container mx-auto max-w-6xl">
         {/* 개인정보 수집·이용 동의 전문 토글은 생략, 텍스트로 안내 */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-6 mb-8">
-          <div>
-            <h2 className="text-lg font-bold text-white mb-3">{companyName}</h2>
-            <div className="space-y-1 text-sm">
-              <p>회사명: {companyName} / 대표자: {settings?.representative || "대표자"}</p>
-              <p>사업자등록번호: {settings?.businessNumber || "-"}</p>
-              {settings?.registrationNumber && (
-                <p>대부중개업등록번호: {settings.registrationNumber}</p>
-              )}
-              <p>주소: {settings?.address || "/"}</p>
-            </div>
-          </div>
-          <div className="text-right text-sm">
-            <p className="text-white font-semibold">전화 {phone}</p>
-            <p className="text-zinc-500 mt-1">평일 09:00 ~ 18:00 · 주말·공휴일 휴무</p>
+        <div className="mb-8">
+          <h2 className="text-lg font-bold text-white mb-3">{companyName}</h2>
+          <div className="space-y-1 text-sm">
+            <p>회사명: {companyName} / 대표자: {settings?.representative || "대표자"}</p>
+            <p>사업자등록번호: {settings?.businessNumber || "-"}</p>
+            {settings?.registrationNumber && (
+              <p>대부중개업등록번호: {settings.registrationNumber}</p>
+            )}
+            <p>주소: {settings?.address || "/"}</p>
+            <p>전화: {phone}</p>
           </div>
         </div>
 
