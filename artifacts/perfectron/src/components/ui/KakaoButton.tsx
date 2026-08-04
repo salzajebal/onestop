@@ -20,10 +20,10 @@ function KakaoIcon() {
 export function KakaoButton() {
   const { data: settings } = useGetSettings();
 
+  if (!settings?.kakaoLink) return null;
+
   const handleClick = () => {
-    if (settings?.kakaoLink) {
-      window.open(settings.kakaoLink, "_blank");
-    }
+    window.open(settings.kakaoLink, "_blank");
   };
 
   return (

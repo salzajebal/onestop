@@ -252,21 +252,21 @@ export function ConsultationForm() {
           </form>
 
           {/* 카카오 채팅 */}
-          <div className="mt-6 border-t border-gray-100 pt-6 text-center">
-            <p className="text-sm font-semibold text-gray-700 mb-1">
-              대기 없이 <span className="text-gray-900">실시간 상담원과 연결</span>되고 싶다면
-            </p>
-            <p className="text-xs text-gray-400 mb-4">아래 버튼을 눌러 카카오톡으로 바로 상담하세요</p>
-            <button
-              type="button"
-              onClick={() => {
-                if (settings?.kakaoLink) window.open(settings.kakaoLink, "_blank");
-              }}
-              className="w-full rounded-xl bg-[#FEE500] py-3.5 text-sm font-bold text-[#391B1B] hover:bg-[#f5d800] transition-colors flex items-center justify-center gap-2"
-            >
-              <span className="text-base">●</span> 카카오톡 채팅 상담
-            </button>
-          </div>
+          {settings?.kakaoLink && (
+            <div className="mt-6 border-t border-gray-100 pt-6 text-center">
+              <p className="text-sm font-semibold text-gray-700 mb-1">
+                대기 없이 <span className="text-gray-900">실시간 상담원과 연결</span>되고 싶다면
+              </p>
+              <p className="text-xs text-gray-400 mb-4">아래 버튼을 눌러 카카오톡으로 바로 상담하세요</p>
+              <button
+                type="button"
+                onClick={() => window.open(settings.kakaoLink, "_blank")}
+                className="w-full rounded-xl bg-[#FEE500] py-3.5 text-sm font-bold text-[#391B1B] hover:bg-[#f5d800] transition-colors flex items-center justify-center gap-2"
+              >
+                <span className="text-base">●</span> 카카오톡 채팅 상담
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </section>
