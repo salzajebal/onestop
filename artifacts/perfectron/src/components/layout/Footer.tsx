@@ -25,7 +25,6 @@ export function Footer() {
               <p>대부중개업등록번호: {settings.registrationNumber}</p>
             )}
             <p>주소: {settings?.address || "/"}</p>
-            <p>전화: {phone}</p>
           </div>
         </div>
 
